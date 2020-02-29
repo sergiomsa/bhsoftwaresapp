@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>
+      <div class="pb-0">
+        <strong *ngIf="id==0">Novo aluno</strong>
+        <strong *ngIf="id>0">Revisar aluno</strong>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <form [formGroup]="alunoForm">
+      <div fxLayout="row wrap">
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput name="nome" id="nome" [formControl]="alunoForm.controls['nome']" placeholder="Nome *">
+          </mat-form-field>
+          <small *ngIf="alunoForm.controls['nome'].hasError('required') && alunoForm.controls['nome'].touched"
+            class="form-error-msg">
+            O nome é obrigatório </small>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput nome="email" id="email" [formControl]="alunoForm.controls['email']" placeholder="Email *">
+          </mat-form-field>
+          <small *ngIf="alunoForm.controls['email'].hasError('required') && alunoForm.controls['email'].touched"
+            class="form-error-msg">
+            O Email do aluno é obrigatório </small>
+        </div>
+		
+		    <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput name="datadenascimento" id="datadenascimento"
+              [formControl]="alunoForm.controls['datadenascimento']" [matDatepicker]="datadenascimentoDatepicker"
+              placeholder="Data de nascimento *">
+            <mat-datepicker-toggle matSuffix [for]="datadenascimentoDatepicker"></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #datadenascimentoDatepicker></mat-datepicker>
+          <small
+            *ngIf="alunoForm.controls['datadenascimento'].hasError('required') && alunoForm.controls['datadenascimento'].touched"
+            class="form-error-msg"> Data de nascimento é Obrigatório </small>
+          <small
+            *ngIf="alunoForm.controls['datadenascimento'].hasError('date') && alunoForm.controls['datadenascimento'].touched"
+            class="form-error-msg"> Data inválida </small>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select name="curso_id" formControlName="curso_id" placeholder="Matriculado no(s) curso(s) *" class="mb-1" multiple>
+              <mat-option *ngFor="let curso of cursos" [value]="curso.id">
+                {{curso.titulo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <button mat-raised-button color="primary" (click)="submit()"
+            [disabled]="alunoForm.invalid">Salvar</button>
+          <span fxFlex></span>
+          <button mat-stroked-button color="primary" type="button" (click)="cancelarFormulario()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

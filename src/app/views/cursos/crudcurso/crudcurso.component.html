@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>
+      <div class="pb-0">
+        <strong *ngIf="id==0">Novo curso</strong>
+        <strong *ngIf="id>0">Revisar curso</strong>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <form [formGroup]="cursoForm">
+      <div fxLayout="row wrap">
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput name="titulo" id="titulo" [formControl]="cursoForm.controls['titulo']" placeholder="Título *">
+          </mat-form-field>
+          <small *ngIf="cursoForm.controls['titulo'].hasError('required') && cursoForm.controls['titulo'].touched"
+            class="form-error-msg">
+            O titulo é obrigatório </small>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput titulo="descricao" id="descricao" [formControl]="cursoForm.controls['descricao']" placeholder="Descrição *">
+          </mat-form-field>
+          <small *ngIf="cursoForm.controls['descricao'].hasError('required') && cursoForm.controls['descricao'].touched"
+            class="form-error-msg">
+            A descrição do curso é obrigatória </small>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-xs="100" class="pr-1">
+          <button mat-raised-button color="primary" (click)="submit()"
+            [disabled]="cursoForm.invalid">Salvar</button>
+          <span fxFlex></span>
+          <button mat-stroked-button color="primary" type="button" (click)="cancelarFormulario()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

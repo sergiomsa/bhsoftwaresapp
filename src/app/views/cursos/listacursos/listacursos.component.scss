@@ -1,0 +1,15 @@
+.mat-card-header{
+  padding-bottom: 20px !important;
+}
+
+.mat-form-field{
+  display: unset !important;
+}
+
+.my-panel .ui-panel-titlebar {
+  background: #000000
+}
+
+:host /deep/ .datatable-body-row.active .datatable-row-group {
+  background-color:#F5F5F5 !important;
+}

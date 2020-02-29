@@ -1,0 +1,52 @@
+
+      <!-- Tollbar -->
+      <mat-card class="p-0">
+        <mat-card-content class="p-0">
+          <!-- fim tollbar -->
+          <!-- Formulário -->
+          <app-crudcurso [hidden]="formulario===false" #crudcurso [entrada]="entrada"
+            (saida)="getAcaoCrud($event)">
+          </app-crudcurso>
+          <!-- fim formulário -->
+          <!-- pesquisa -->
+          <div *ngIf="!formulario">
+            <form [formGroup]="filterForm" class="pl-1">
+               <div fxLayout="row wrap">
+
+                <mat-form-field class="pr-1">
+                   <mat-select name="pesquisarpor" id="pesquisarpor" placeholder="Por"
+                      [formControl]="filterForm.controls['pesquisarpor']">
+                      <mat-option value="titulo" ngDefaultControl>Título</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field class="pr-1">
+                    <input matInput name="searchProduct" placeholder="Pesquisar"
+                      [formControl]="filterForm.controls['search']">
+                </mat-form-field>
+              
+                <button mat-mini-fab [disabled]="filterForm.invalid" color="primary" class="mr-1"
+                  (click)="pesquisarCurso()" matTooltip="Pesquisar">
+                  <mat-icon>search</mat-icon>
+                </button>
+
+                <button mat-mini-fab color="primary" class="mr-1" (click)="getPesquisar()" matTooltip="Listar todos">
+                  <mat-icon>list</mat-icon>
+                </button>
+
+                <button mat-mini-fab color="warn" class="mr-1" (click)="inserirCurso()" *ngIf="!formulario"
+                  matTooltip="Inserir novo">
+                  <mat-icon>create</mat-icon>
+                </button>
+
+              </div>
+            </form>
+          </div>
+          <!-- fim pesquisa -->
+          <!-- Tabela  -->
+          <app-listacursos [hidden]="formulario===true" #listacursos
+            [entrada]="entrada" (saida)="getAcaoLista($event)"></app-listacursos>
+          <!-- fim tabela -->
+        </mat-card-content>
+      </mat-card>
+ 

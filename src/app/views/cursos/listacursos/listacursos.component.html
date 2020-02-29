@@ -1,0 +1,38 @@
+<mat-card class="p-0" *ngIf="cursos.length">
+  <mat-card-content class="p-0">
+    <ngx-datatable #tablecursos  class="material ml-0 mr-0" 
+      [rows]="cursos" 
+      [columnMode]="'flex'" 
+      [headerHeight]="50"
+      [footerHeight]="50" 
+      [externalPaging]="true" 
+      [count]="page_totalElements" 
+      [offset]="page_pageNumber"
+      [limit]="page_size" 
+      (page)='paginacao($event)' 
+      [rowHeight]="40" 
+      [externalSorting]="true"
+      [loadingIndicator]="carregando" 
+      (sort)="onOrdenar($event)" 
+      [sorts]="[{prop: 'titulo', dir: 'asc'}]"
+      [messages]="messages">
+
+      <ngx-datatable-column prop="titulo" name="Curso" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.titulo }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [sortable]="false" name="" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="emitirAcao('editar', row)" matTooltip="Editar curso">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button mat-sm-button color="warn" [disabled]="row.matriculas[0].count > 0" (click)="emitirAcao('excluir', row)" matTooltip="Excluir curso">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
